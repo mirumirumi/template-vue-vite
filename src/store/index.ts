@@ -1,7 +1,19 @@
-import { createStore } from 'vuex'
+import { InjectionKey } from 'vue'
+import { createStore, Store, useStore as baseUseStore } from 'vuex'
 
-export default createStore({
+export interface State {
+  like: number
+}
+
+// interface xxx {
+
+// }
+
+export const store = createStore<State>({
   state: {
+    like: 13,
+  },
+  getters: {
   },
   mutations: {
   },
@@ -10,3 +22,8 @@ export default createStore({
   modules: {
   }
 })
+
+export const key: InjectionKey<Store<State>> = Symbol();
+export const useStore = () => {
+  return baseUseStore(key)
+}

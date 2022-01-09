@@ -1,30 +1,24 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <TheHeader></TheHeader>
+  <main class="view_wrap">
+    <router-view/>
+  </main>
+  <TheFooter></TheFooter>
 </template>
+
+<script setup lang="ts">
+import TheHeader from "@/components/layouts/TheHeader.vue"
+import TheFooter from "@/components/layouts/TheFooter.vue"
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
+  color: $text;
+  background-color: $background;
+  font-family: "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
