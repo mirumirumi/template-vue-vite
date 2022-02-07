@@ -19,6 +19,5 @@ import TheFooter from "@/components/layouts/TheFooter.vue"
   color: $text;
   background-color: $background;
   font-family: "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
-
 }
 </style>

@@ -1,7 +1,10 @@
+.env.*
+!*.gpg
 .DS_Store
 node_modules
 /dist
-secrets/
+not_used/
+*.md
 
 # ----------------------------------- #
 
