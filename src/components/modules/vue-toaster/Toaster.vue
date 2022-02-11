@@ -210,7 +210,7 @@ export default {
   display: flex;
   padding: 2em 2.3em;
   overflow: hidden;
-  z-index: 9999;
+  z-index: 998;
   pointer-events: none;
 }
 @media screen and (max-width: 768px) {
@@ -248,6 +248,7 @@ export default {
     margin: 0.7em 0;
     width: calc(100% - 1.3em - 0.9em);
     line-height: 1.4;
+    font-family: "Open Sans", sans-serif;
   }
 }
 @media screen and (max-width: 768px) {

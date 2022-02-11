@@ -5,6 +5,7 @@ node_modules
 /dist
 not_used/
 *.md
+!README.md
 
 # ----------------------------------- #
 

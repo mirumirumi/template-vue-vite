@@ -18,6 +18,6 @@ export const store = createStore<State>({
 })
 
 export const key: InjectionKey<Store<State>> = Symbol();
-export const useStore = () => {
+export const useStore = () => {  //eslint-disable-line
   return baseUseStore(key)
 }
