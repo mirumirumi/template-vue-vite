@@ -31,5 +31,9 @@ function setViewBox(): void {
 <style lang="scss" scoped>
 svg {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1.1em;
 }
 </style>

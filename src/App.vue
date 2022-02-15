@@ -1,9 +1,9 @@
 <template>
-  <TheHeader></TheHeader>
+  <TheHeader />
   <main class="view_wrap">
     <router-view/>
   </main>
-  <TheFooter></TheFooter>
+  <TheFooter />
 </template>
 
 <script setup lang="ts">
@@ -15,7 +15,6 @@ import TheFooter from "@/components/layouts/TheFooter.vue"
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color: $text;
   background-color: $background;
   font-family: "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
