@@ -48,7 +48,7 @@ ul, li {
     border-color: $primary;
     background-color: $primary;
     &:hover {
-      color: text_white_hover;
+      color: $text_white_hover;
       border-color: $primary_hover;
       background-color: $primary_hover;
     }
