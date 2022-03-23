@@ -10,15 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+    
       - uses: actions/setup-node@v2.4.1
         with:
           node-version: "14"
-      - run: npm install
-      - name: gpg
+
+      - name: Installing npm modules...
+        run: npm install
+
+      - name: Decrypting secrets with gpg...
         run: |
           echo "${{ secrets.GPG_PASSPHRASE }}" | sudo gpg --batch --passphrase-fd 0 --output ".env.prd" --decrypt ".env.prd.gpg" 
-      - run: npm run build-prd
-      - name: prd deploy
+
+      - name: Building...
+        run: npm run build-prd
+
+      - name: Deploying...
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.CONOHA_PRIVATE_KEY }}" > ~/.ssh/id_rsa
