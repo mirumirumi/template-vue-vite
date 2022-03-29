@@ -226,8 +226,8 @@ export default {
   align-items: center;
   margin: 0.5em 1em;
   padding: 0.1em 1.3em 0;
-  width: 37%;
-  min-width: 300px;
+  width: auto;
+  max-width: 444px;
   min-height: 39.5px;
   color: #fff;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -246,7 +246,6 @@ export default {
   span {
     display: block;
     margin: 0.7em 0;
-    width: calc(100% - 1.3em - 0.9em);
     line-height: 1.4;
     font-family: "Open Sans", sans-serif;
   }
