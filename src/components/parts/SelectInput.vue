@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import { v4 as uuidv4 } from "uuid"
 import TransparentBack from "./TransparentBack.vue"
 
@@ -35,6 +35,11 @@ const uuid = uuidv4()
 const isSelecting = ref(false)
 const currentItem = ref(p.current)
 const width = ref(p.width)
+
+// for the parent component instructs it to change `currentItem`
+watch(p, () => {
+  currentItem.value = p.current
+})
 
 const toggleIsSelecting = (): void => {
   isSelecting.value = !isSelecting.value
