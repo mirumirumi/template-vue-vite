@@ -1,6 +1,6 @@
 <template>
   <div class="select_input">
-    <button type="button" class="input select_button" @click="toggleIsSelecting">
+    <button type="button" class="select_button" :class="{ 'invalid': _isInvalid }" @click="toggleIsSelecting(); disableInavalid()">
       {{ currentItem }}
       <span class="dropdown-caret"></span>
     </button>
@@ -18,28 +18,36 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { v4 as uuidv4 } from "uuid"
-import TransparentBack from "./TransparentBack.vue"
+import TransparentBack from "../modules/TransparentBack.vue"
 
 const p = defineProps<{
   items: Array<string>,
   current: string,
   width?: string,
   isDisable?: boolean,
+  isInvalid?: boolean,
 }>()
 
 const emit = defineEmits<{
   (e: "changeValue", value: string): void,
+  (e: "disableInvalid"): void,
 }>()
 
 const uuid = uuidv4()
 const isSelecting = ref(false)
 const currentItem = ref(p.current)
 const width = ref(p.width)
+const _isInvalid = ref(p.isInvalid)
 
-// for the parent component instructs it to change `currentItem`
 watch(p, () => {
   currentItem.value = p.current
+  _isInvalid.value = p.isInvalid
 })
+
+const disableInavalid = () => {
+  _isInvalid.value = false
+  emit("disableInvalid")
+}
 
 const toggleIsSelecting = (): void => {
   isSelecting.value = !isSelecting.value
@@ -102,9 +110,16 @@ function tabindexToId(to: number, maxlength: number): string {
   width: v-bind(width);
   button {
     width: v-bind(width);
-    font-size: 12.73px;
-    font-weight: 700;
-    border-radius: 7px;
+    padding: 0.375rem calc(0.75rem + 7px) 0.375rem 0.75em;
+    color: $text;
+    font-size: 1em;
+    line-height: 1.5;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
     .dropdown-caret {
       position: absolute;
       top: 2.1px;
@@ -128,30 +143,29 @@ function tabindexToId(to: number, maxlength: number): string {
     padding: 0.34em 0 0.33em;
     max-height: 200px;
     border: solid 1.9px #c9c9c9;
-    border-radius: 7px;
-    background-color: #fffcf9;
+    border-radius: 0.25rem;
+    background-color: #fff;
     box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.19);
     overflow-y: auto;
     z-index: 14;
     li {
       position: relative;
-      padding: 0.01em 1em 0.07em;
-      font-size: 0.87em;
-      font-weight: bold;
-      color: #737373;
+      padding: 0.15em 1em 0.01em;
+      font-size: 1em;
+      color: #2d2d2d;
       white-space: nowrap;
       cursor: pointer;
       &:hover {
-        background-color: #e1ded9;
+        background-color: #eeeeee;
       }
       &:focus {
-        background-color: #e1ded9;
+        background-color: #eeeeee;
         outline: 0;
       }
     }
     @include mobile {
       margin: 0.6em 0 0 10px;
-      width: 50%;
+      // width: 50%;
       max-height: 180px;
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <div class="modal_base" id="modal_base" @click="clickedToCloseModal($event)">
-    <div class="modal" id="modal_body" :class="className">
+    <div class="modal_body" id="modal_body" :class="className">
       <slot></slot>
-      <SvgIcon icon="close" color="#e6e6e6" @click="closeModal" />
+      <SvgIcon icon="close" color="#b8b8b8" @click="closeModal" />
     </div>
     <teleport to="body">
       <ModalBack />
@@ -23,7 +23,7 @@ const emit = defineEmits<{
   (e: "closeModal"): void,
 }>()
 
-const clickedToCloseModal = (e: any = null) => {  // eslint-disable-line
+const clickedToCloseModal = (e: any = null) => {
   if (e.target.id === "modal_body")
     return
 
@@ -67,7 +67,7 @@ onUnmounted(() => {
   inset: 0;
   display: flex;
   z-index: 2;
-  .modal {
+  .modal_body {
     margin: auto;
     position: relative;
     width: 95%;
@@ -76,7 +76,7 @@ onUnmounted(() => {
     padding-bottom: 2.3em;
     color: $text;
     background-color: $background;
-    box-shadow: 0 5px 20px rgba($background, 0.666);
+    box-shadow: 1px 3px 5px rgba(#636363, 0.666);
     border-radius: 7px;
     svg {
       top: 10px;
