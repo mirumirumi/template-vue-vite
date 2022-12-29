@@ -13,7 +13,7 @@ export default ({ mode }: { mode: string }) => {
       preprocessorOptions: {
         scss: {
           additionalData: `
-          @import "@/assets/scss/main.scss";
+          @import "@/assets/styles/main.scss";
         `,
         },
       },
