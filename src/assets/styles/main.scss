@@ -1,36 +1,70 @@
 /**
- * vars
+ * mixin
  */
-$text                       : #;
-$text_white                 : #f2f2f2;
-$text_white_hover           : #e3e3e3;
-$background                 : #;
-$primary                    : #;
-$primary_hover              : #;
-$form-feedback-invalid-color: #dc3545;
-
+@mixin mobile {
+  @media screen and (max-width: 428px) {  // iPhone 12 Pro Max
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
 
 /**
- * globals
+ * common
  */
+:root {
+  --color-text: #4e4e4e;
+  --color-gray: #bab9b9;
+  --color-text-white: #f2f2f2;
+  --color-text-white-hover: #e3e3e3;
+  --color-background: #fffcf9;
+  --color-footer: #f8f5f2;
+  --color-primary: #ec6839;
+  --color-mi: #604134;
+  --color-link: #bb0000;
+  --color-invalid: #dc3545;
+  --color-input-focus-border: #e9b18d;
+  --color-input-focus-shadow: 0 0 0 0.19rem rgba(237, 120, 45, 0.37);
+  --width-max-base: 1188px;
+  --width-scrollbar: 16px;
+  --width-max-screen: calc(var(--width-max-base) - var(--width-scrollbar));
+}
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $text;
+  background-color: $background;
+}
 * {
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 html, body {
   margin: 0;
   padding: 0;
-  font-size: 16px;
-  font-family: "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
+  font-size: 18px;
+  font-family: "Custom Noto Sans", "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-footer);
+  @include mobile {
+    font-size: 16px;
+  }
 }
-a {
-  color: $primary;
+p a,
+span a,
+li a,
+table a {
+  color: var(--color-link);
 }
 ul, li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-img, svg {
+img {
   vertical-align: middle;
 }
 textarea {
@@ -38,61 +72,67 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-  color: #ccc;
+  color: #cccccc;
 }
 input:focus-visible,
 button:focus-visible,
 textarea:focus-visible {
   outline: none;
 }
-.form-control {  // あとで一括クラス名置換したい、「form」とかでいいか？
+.input {
   display: block;
   width: 100%;
   padding: 0.375em 0.75em;
-  color: $text;
+  color: #5b5b5b;
   font-size: 1em;
   font-weight: 400;
   line-height: 1.5;
-  background-color: #fff;
+  background-color: #ffffff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1.1px solid #e2dcd3;
   appearance: none;
   border-radius: 5px;
-  transition: all 0.13s ease-in-out;
+  transition: all 0.17s ease-out;
   &:focus {
-    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    // border-color: #a3c0e1;
+    // box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    border-color: var(--color-input-focus-border);
+    box-shadow: var(--color-input-focus-shadow);
   }
   &:disabled, &[readonly] {
     background-color: #e9ecef;
     opacity: 1;
   }
+  &::placeholder {
+    font-family: "Custom Noto Sans", "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
+  }
 }
 label {
   display: inline-block;
-  .form-check-input[disabled] ~ & {
+  .form_check_input[disabled] ~ & {
     opacity: 0.5;
   }
 }
-.form-label {
+.form_label {
   margin-bottom: 0.5rem;
 }
-.form-check {
+.form_check {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.7em;
   margin-bottom: 0.125rem;
-  .form-check-input {
+  .form_check_input {
     float: left;
-    margin-left: -1.7em;  
+    margin-left: -1.7em;
   }
 }
-.form-check-input {
+.form_check_input {
   width: 1em;
   height: 1em;
   margin-top: 0.25em;
   font-size: inherit;
   vertical-align: top;
-  background-color: #fff;
+  background-color: #ffffff;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -103,8 +143,8 @@ label {
     border-radius: 50%;
   }
   &:checked {
-    border-color: $primary;
-    background-color: $primary;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
   }
   &:checked[type="radio"] {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
@@ -125,9 +165,9 @@ label {
 @include mobile {
   .display_none_mobile {
     display: none;
-  }  
+  }
 }
-.dropdown-caret {
+.dropdown_caret {
   display: inline-block;
   width: 0;
   height: 0;
@@ -142,13 +182,19 @@ label {
   border-bottom-color: transparent;
 }
 ::-webkit-scrollbar {
-  width: 16px;
+  width: var(--width-scrollbar);
 }
 ::-webkit-scrollbar-thumb {
   border: 3.5px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
   border-radius: 9999px;
-  background-color: #d4d0d2;
+  background-color: #c7bfba;
+}
+
+/**
+ * globals
+ */
+.xxxxxxxx {
 }
 
 /**
@@ -214,7 +260,7 @@ label {
  */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.13s ease-out;
+  transition: opacity 0.07s ease-out;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -222,9 +268,40 @@ label {
 }
 .fade-enter-to,
 .fade-leave-from {
-  opacity: 0.666;
+  opacity: 1;
 }
-
+.fadedown-enter-active {
+  transition: all 0.13s ease-out;
+}
+.fadedown-leave-active {
+  transition: all 0.1s ease;
+}
+.fadedown-enter-from {
+  opacity: 0;
+  transform: translateY(-11px);
+}
+.fadedown-leave-to {
+  opacity: 0;
+}
+.fadedown-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.fadedown-leave-from {
+  opacity: 1;
+}
+.tooltip-enter-active,
+.tooltip-leave-active {
+  transition: opacity 0.11s ease-out;
+}
+.tooltip-enter-from,
+.tooltip-leave-to {
+  opacity: 0;
+}
+.tooltip-enter-to,
+.tooltip-leave-from {
+  opacity: 1;
+}
 .move-move {
   transition: transform 0.19s ease-out;
 }
@@ -239,52 +316,6 @@ label {
 .move-leave-to {
   opacity: 0;
 }
-
-.move2-move {
-  transition: transform 0.19s ease-out;
-}
-.move2-enter-active,
-.move2-leave-active {
-  transition: opacity 0.13s ease-out;
-}
-.move2-leave-active {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-.move2-enter-from,
-.move2-leave-to {
-  opacity: 0;
-}
-
-.howan-enter-active,
-.howan-leave-active {
-  transition: all 0.1s cubic-bezier(.17,.67,.67,.99);
-}
-.howan-enter-from,
-.howan-leave-to {
-  opacity: 0;
-  transform: scale(0.93);
-}
-.howan-enter-to,
-.howan-leave-from {
-  opacity: 0.777;
-  transform: scale(1);
-}
-
-.loading-enter-active,
-.loading-leave-active {
-  transition: opacity 0.23s ease-out;
-}
-.loading-enter-from,
-.loading-leave-to {
-  opacity: 0;
-}
-.loading-enter-to,
-.loading-leave-from {
-  opacity: 1;
-}
-
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.13s ease-out;
@@ -297,12 +328,29 @@ label {
 .slide-leave-from {
   transform: translate(0px, 0px);
 }
- 
+
 /**
- * responsive
+ * fonts
  */
-@mixin mobile {
-  @media screen and (max-width: 768px) {
-    @content;
-  }
+@font-face {
+  font-family: "Custom Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("NotoSansCJKjp-Regular.otf"),
+    local("NotoSansJP-Regular.otf"),
+    url("@/assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.woff2") format("woff2");
+  // unicode-range: U+000-5FF;
+}
+@font-face {
+  font-family: "Custom Noto Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("NotoSansCJKjp-Bold.otf"),
+    local("NotoSansJP-Bold.otf"),
+    url("@/assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.woff2") format("woff2");
+  // unicode-range: U+000-5FF;
 }

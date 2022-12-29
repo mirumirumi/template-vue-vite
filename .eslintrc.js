@@ -1,9 +1,11 @@
+/* eslint-env node */
+require("@rushstack/eslint-patch/modern-module-resolution")
+
 module.exports = {
   root: true,
   env: {
     browser: true,
     node: true,
-    // "vue/setup-compiler-macros": true,
   },
   globals: {
     defineProps: "readonly",
@@ -15,13 +17,14 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "@vue/typescript/recommended",
+    "@vue/eslint-config-typescript",
   ],
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: "latest",
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "prd" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "prd" ? "warn" : "off",
+    "no-console": import.meta.env.DEV ? "warn" : "off",
+    "no-debugger": import.meta.env.DEV ? "warn" : "off",
     "no-useless-escape": 0,
     "no-irregular-whitespace": 0,
     "@typescript-eslint/no-extra-semi": 0,
