@@ -21,9 +21,7 @@
   --color-text-white: #f2f2f2;
   --color-text-white-hover: #e3e3e3;
   --color-background: #fffcf9;
-  --color-footer: #f8f5f2;
   --color-primary: #ec6839;
-  --color-mi: #604134;
   --color-link: #bb0000;
   --color-invalid: #dc3545;
   --color-input-focus-border: #e9b18d;
@@ -31,12 +29,6 @@
   --width-max-base: 1188px;
   --width-scrollbar: 16px;
   --width-max-screen: calc(var(--width-max-base) - var(--width-scrollbar));
-}
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--color-text);
-  background-color: var(--color-background);
 }
 * {
   box-sizing: border-box;
@@ -48,7 +40,9 @@ html, body {
   font-size: 18px;
   font-family: "Custom Noto Sans", "Open Sans", Helvetica, "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif;
   color: var(--color-text);
-  background-color: var(--color-footer);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   @include mobile {
     font-size: 16px;
   }
