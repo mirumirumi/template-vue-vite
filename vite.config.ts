@@ -42,8 +42,8 @@ export default ({ mode }: { mode: string }) => {
             "@/router/router": [
               ["default", "router"],
             ],
-            "@/store/store": [
-              ["useSessionStore", "useSessionStore"],
+            "@/stores/session": [
+              "useSessionStore",
             ],
             "@/lib/helpers": [
               "delay"
