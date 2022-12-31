@@ -30,7 +30,7 @@ export default ({ mode }: { mode: string }) => {
           "vue-router",
           "@vueuse/core",
           {
-            "ohmyfetch": [
+            "ofetch": [
               "$fetch",
             ],
             "vue-toastification": [
