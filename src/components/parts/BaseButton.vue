@@ -1,7 +1,18 @@
 <template>
-  <button type="button" :id="_id" class="btn" :class="{ 'btn-primary': type === 'fill', 'btn-outline-primary': type === 'outline', 'btn-text-only': type === 'text', 'auto_width': isAutoWidth }" @click.prevent=";" :disabled="isSubmitting || disabled">
-    <PartsLoadSpinner v-if="isSubmitting" :kind="'short'" :color="spinnerColor ? spinnerColor : '#fff'" />
-    <slot v-else></slot>
+  <button
+    type="button"
+    :id="_id"
+    class="btn"
+    :class="{ 'btn-primary': type === 'fill', 'btn-outline-primary': type === 'outline', 'btn-text-only': type === 'text', 'auto_width': isAutoWidth }"
+    @click.prevent=";"
+    :disabled="isSubmitting || disabled"
+  >
+    <LoadSpinner
+      v-if="isSubmitting"
+      :kind="'short'"
+      :color="spinnerColor ? spinnerColor : '#fff'"
+    />
+    <slot v-else />
   </button>
 </template>
 
@@ -9,15 +20,17 @@
 import { v4 as uuidv4 } from "uuid"
 
 const p = defineProps<{
-  type: "fill" | "outline" | "text",
-  id?: string,
-  isSubmitting?: boolean,
-  disabled?: boolean,
-  spinnerColor?: string,
+  type: "fill" | "outline" | "text"
+  id?: string
+  mainColor?: string
+  isSubmitting?: boolean
+  disabled?: boolean
+  spinnerColor?: string
 }>()
 
 const uuid = uuidv4()
 const _id = ref(p.id)
+const _mainColor = ref(p.mainColor || "var(--color-primary)")
 const width = ref("")
 
 onMounted(async () => {
@@ -40,16 +53,16 @@ const isAutoWidth = computed(() => {
   display: inline-block;
   width: auto;
   margin: auto;
-  line-height: 1.5;
+  padding: 0.7em 1.3em 0.79em;
   color: var(--color-text);
   font-size: 0.85em;
   font-weight: bold;
+  font-family: var(--font-family);
+  line-height: 1.5;
   text-align: center;
   text-decoration: none;
   border: 1px solid transparent;
-  padding: 0.7em 1.3em 0.65em;
   border-radius: 5px;
-  background-color: transparent;
   box-shadow: 1.3px 1.7px 5px -2px #50494e59;
   cursor: pointer;
   user-select: none;
@@ -65,22 +78,23 @@ const isAutoWidth = computed(() => {
 }
 .btn-primary {
   color: #ffffff;
-  border-color: var(--color-primary);
-  background-color: var(--color-primary);
+  border-color: v-bind(mainColor);
+  background-color: v-bind(mainColor);
   &:hover {
     filter: saturate(0.85);
   }
 }
 .btn-outline-primary {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: v-bind(mainColor);
+  border-color: v-bind(mainColor);
   background-color: #ffffff;
   &:hover {
-    color: var(--color-primary);
+    color: v-bind(mainColor);
     background-color: #f6f2f3;
   }
 }
 .btn-text-only {
+  background-color: transparent;
   box-shadow: none;
 }
 .btn-check:focus + .btn-primary[data-v-4ba94436], .btn-primary[data-v-4ba94436]:focus {
