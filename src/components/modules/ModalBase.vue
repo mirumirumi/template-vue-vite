@@ -2,18 +2,18 @@
   <div class="modal_base" id="modal_base" @click="clickedToCloseModal($event)">
     <div class="modal_body" id="modal_body" :class="className">
       <slot></slot>
-      <PartsSvgIcon icon="close" color="#b8b8b8" @click="closeModal" />
+      <SvgIcon icon="close" color="#b8b8b8" @click="closeModal" />
     </div>
     <Teleport to="body">
       <Transition name="fade" appear>
-        <PartsModalBack v-if="isOpenModalBack" />
+        <ModalBack v-if="isOpenModalBack" />
       </Transition>
     </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import { delay } from "@/lib/utils"
+import { delay } from "@/lib/helpers"
 
 defineProps<{
   className: string,
@@ -92,7 +92,7 @@ onUnmounted(() => {
     max-width: 555px;
     padding: 1.5em 1.9em 1.9em;
     color: var(--color-text);
-    background-color: var(--color-background);
+    background-color: #eef4f6;
     box-shadow: 1px 3px 5px rgba(#636363, 0.666);
     border-radius: 7px;
     svg {
@@ -115,18 +115,6 @@ body.modal {
   @include mobile {
     overflow-y: auto;
     padding-right: 0;
-  }
-}
-.modal_base {
-  .modal_body {
-    .title {
-      font-size: 1.17em;
-      font-weight: bold;
-      text-align: center;
-    }
-    & > div {
-      margin: 19px auto;
-    }
   }
 }
 </style>
