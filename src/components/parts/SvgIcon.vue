@@ -8,7 +8,8 @@
 </template>
 
 <script setup lang="ts">
-const theme = useState("theme")
+// const theme = useState("theme")  // only Nuxt 3
+const theme = ref("light")
 
 const p = defineProps<{
   icon: string,
