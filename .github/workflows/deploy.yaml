@@ -36,6 +36,5 @@ jobs:
 
       - name: Copying files to s3...
         run: |
-          aws s3 sync --region ap-northeast-1 dist/img/ s3://keimasumi-dev-static-hosting/img --cache-control "max-age=31536000"
-          aws s3 sync --region ap-northeast-1 dist s3://keimasumi-dev-static-hosting --exclude "dist/img/*" --cache-control "no-cache"
-          aws cloudfront create-invalidation --distribution-id E2QKWYLEZV5EEE --paths "/*"
+          aws s3 sync --region ap-northeast-1 dist s3://xxxxx --cache-control "max-age=31536000"
+          aws cloudfront create-invalidation --distribution-id EXXXXXXXXXXXXX --paths "/*"
