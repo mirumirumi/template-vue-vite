@@ -74,6 +74,9 @@ button:focus-visible,
 textarea:focus-visible {
   outline: none;
 }
+button {
+  cursor: pointer;
+}
 .input {
   display: block;
   width: 100%;
