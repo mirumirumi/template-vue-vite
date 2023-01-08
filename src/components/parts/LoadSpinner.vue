@@ -18,10 +18,10 @@
 
 <script setup lang="ts">
 withDefaults(defineProps<{
-  kind: "short" | "long",
-  color?: string,
+  kind: "short" | "long"
+  color?: string
 }>(), {
-  color: "#8b8b8b",
+  color: "#8b8b8b"
 })
 </script>
 
