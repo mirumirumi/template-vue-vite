@@ -12,13 +12,10 @@
 const theme = ref("light")
 
 const p = defineProps<{
-  icon: string,
-  color: string,
-  dark?: string,
-  hover?: {
-    on: boolean,
-    color: string,
-  },
+  icon: string
+  color: string
+  hoverOn?: boolean
+  hoverColor?: string
 }>()
 
 const color = ref(p.color)
@@ -38,13 +35,13 @@ watch(theme, () => {
   }
 })
 
-watch(p, () => {
-  if (p.hover?.on) {
-    color.value = p.hover.color
+watch(() => p.hoverOn, () => {
+  if (p.hoverOn && p.hoverColor) {
+    color.value = p.hoverColor
   } else {
     color.value = p.color
   }
-}, { deep: true })
+})
 
 function setViewBox(): void {
   switch (p.icon) {

@@ -3,7 +3,7 @@ export const today = () => {
 }
 
 export const round = (value: number, base = 6): number => {
-  return Math.round(value * (10**base)) / (10**base)
+  return Math.round(value * (10 ** base)) / (10 ** base)
 }
 
 export const delay = (msec: number): Promise<void> => {
@@ -16,4 +16,16 @@ export const delay = (msec: number): Promise<void> => {
 
 export const toBool = (data: string): boolean => {
   return data.toLowerCase() === "true"
+}
+
+export function isIOS(): boolean {
+  // https://bit.ly/2D2QKav
+  return [
+    "iPad Simulator",
+    "iPhone Simulator",
+    "iPod Simulator",
+    "iPad",
+    "iPhone",
+    "iPod"
+  ].includes(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
