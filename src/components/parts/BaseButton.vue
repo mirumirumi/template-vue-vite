@@ -67,7 +67,7 @@ const isAutoHeight = computed(() => {
   line-height: 1.5;
   text-align: center;
   text-decoration: none;
-  border: 1px solid transparent;
+  border: 1.9px solid transparent;
   border-radius: 5px;
   box-shadow: 1.3px 1.7px 5px -2px #50494e59;
   cursor: pointer;
@@ -96,10 +96,11 @@ const isAutoHeight = computed(() => {
 .btn_outline_primary {
   color: v-bind(_mainColor);
   border-color: v-bind(_mainColor);
-  background-color: #ffffff;
+  background-color: var(--color-background);
   &:hover {
     color: v-bind(_mainColor);
-    background-color: #f6f2f3;
+    opacity: 0.7;
+    filter: contrast(0.9);
   }
 }
 .btn_text_only {
